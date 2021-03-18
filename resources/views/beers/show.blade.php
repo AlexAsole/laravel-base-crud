@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <title>Beers Table</title>
+    <title>{{$beer->brand}} {{$beer->name}}</title>
 </head>
 <body>
     <table class="table table-hover">
@@ -20,7 +20,6 @@
           </tr>
         </thead>
         <tbody>
-            @foreach ($beers as $beer)
             <tr>
                 <th scope="col">{{$beer->id}}</th>
                 <th scope="col">{{$beer->brand}}</th>
@@ -30,7 +29,6 @@
                 <th scope="col">{{$beer->brewery}}</th>
                 <th scope="col"><img src={{$beer->image}} alt=""></th>
               </tr>
-            @endforeach
         </tbody>
       </table>
 </body>
