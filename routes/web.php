@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/beers', 'BeerController');
+Route::resource('/beers', 'BeerController');
