@@ -1,5 +1,7 @@
 @extends('template')
 
+@section('title', 'New Beer')
+
 @section('content')
 <form action="{{route('beers.store')}}" method="post">
     @csrf

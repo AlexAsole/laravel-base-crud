@@ -3,6 +3,7 @@
 @section('title', $beer->name)
 
 @section('content')
+<a href={{ route('beers.index') }}><button type="button" class="btn btn-primary index">Back to index</button></a>
 <table class="table table-hover">
     <thead>
       <tr>
