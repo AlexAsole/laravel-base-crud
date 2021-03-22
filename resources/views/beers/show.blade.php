@@ -26,17 +26,19 @@
             <th scope="col">{{$beer->type}}</th>
             <th scope="col">{{$beer->brewery}}</th>
             <th scope="col"><img src={{$beer->image}} alt=""></th>
-            <th scope="col">
-                <a href={{ route('beers.edit', compact('beer')) }}>
-                    <button class="btn btn-primary">
+            <th scope="col" class="d-flex flex-column">
+                <a href={{ route('beers.edit', compact('beer')) }} class="aag-m">
+                    <button class="btn btn-primary" type="submit">
                         <i class="far fa-edit"></i>
                     </button>
                 </a>
-                <a href=#>
-                    <button class="btn btn-danger">
+                <form action=" {{ route('beers.destroy', compact('beer')) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">
                         <i class="fas fa-trash"></i>
                     </button>
-                </a>
+                </form>
             </th>
           </tr>
     </tbody>
