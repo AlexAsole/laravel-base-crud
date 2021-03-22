@@ -15,7 +15,7 @@ class BeerController extends Controller
     public function index()
     {
         $beers = Beer::all();
-        return view('beers.index',['beers' => $beers]);
+        return view('beers.index', ['beers' => $beers]);
     }
 
     /**
@@ -36,6 +36,8 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validateBeer($request);
         $data = $request->all();
         $newBeer = new Beer();
         $newBeer->fill($data);
@@ -48,7 +50,7 @@ class BeerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $beer
+     * @param  Beer  $beer
      * @return \Illuminate\Http\Response
      */
     public function show(Beer $beer)
@@ -59,24 +61,27 @@ class BeerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Beer  $beer
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Beer $beer)
     {
-        //
+        return view('beers.edit', compact('beer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Beer $beer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Beer $beer)
     {
-        //
+        $this->validateBeer($request);
+        $data = $request->all();
+        $beer->update($data);
+        return redirect()->route('beers.show', compact('beer'));
     }
 
     /**
@@ -88,5 +93,16 @@ class BeerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validateBeer(Request $request)
+    {
+        $request->validate([
+            'brand' => 'required|max:255',
+            'name' => 'required|max:255',
+            'gradation' => 'required|numeric|between:0,100',
+            'type' => 'required|max:255',
+            'brewery' => 'required|max:255'
+        ]);
     }
 }
